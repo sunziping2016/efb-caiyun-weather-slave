@@ -1,13 +1,27 @@
 language: python
 python:
   - '3.8'
+env:
+  - CODECOV_TOKEN="60da5c2d-34ad-44a6-b804-6abf490e8761"
 script:
   - mypy efb_caiyun_weather_slave tests
-  - pytest
+  - PYTHONPATH=$(pwd) pytest --cov-report=term --cov=efb_caiyun_weather_slave tests/
+after_success:
+  - codecov
+  - python setup.py sdist --formats=gztar
 deploy:
-  provider: pypi
-  username: "__token__"
-  password:
-    secure: Rw7UDWGrkVuuP3ZoTMHGJQtnv6JSLEETSO3yti01TQZ0YbeE+4Irjaj/sxetDM3lreSbrzG+bfRUs9V4VlzartrDIrMnZmeNzsC1KOMfpnsbtgvY8p0f5tdTHV8IWisX12uim50ReHqej+iMbjCK+NmnHS++7tnVHHdO62y4J90rfUlHcPOBIE+9mR5IRGk+Edn5h9r0GIDjG24e/s8Y9MtMqhq164oxaeOqG+eTSmyp9v1k54q9B7bd78+cv9xXgqQbrofhNKHxub1lmGlQdGWEINjDSvuUi8uvk8GMz/rtOj/z93yo1U4IDbPVstC55M+K53bVWUtx3dl3L0yk9E29fuDLUWu1a8nbV6lxLcq50BHjtB7KMwDcY1WcnOtwXy9B8X0Ow5yCIp7jBDJbfu2MUGU+DkYuBGhw36djmNTZD0KcNOhTzJn8c0426upIdyGTP6tme/FOdumLMLMaUxBwc4UR1mLV5oFwIJ9rUeKA/9deNsAY5Ctpbwp/VjH2OW6ZY7rziYgs1f9hD7sRWwCXiDrECBkhoxTRW1DfPF3ZcdffwDd1LjoOaXEHsq/PBBpbacpWUygzDYim03rf4DQNLA9hpxPq2Ho1IBD4sVc9Zvxdh5Qv1oTPRhzAHz3PZ8Cwuet7gIwQSLYOlgp/Si0qD5Ua85YVnzKLFllBI3U=
-  on:
-    tags: true
+  - provider: releases
+    api_key:
+      secure: baJyWCtCG0LkDHXa1FW2ndmHvZLZLayqC290RRnPhM7NvctRqeWGw6QeMcSaC5mBYKZD6UtUmBW0FJHv0r8Km5jx+2LADjgl7fd+gjKlEc6azzqPH3oc+eVGiS2OcpaKEG275An29a3Olgu7oDXysWkx4XfZPxIPV5RgLNgzkxdjCzUrRrczjSpDPcr2fNHWi0YttQ4t0asJ/YsnSEKoEMTioEfQg/5NdCk2+aXgl6a/dsPQdTD+vh57Dl4PrMP1GQ9m4IuCSKxpz8lWZo2Wr3C78Lm3prT50gRsYKMdRy8eaRFqrs96tWOlnHLlxjZERNzfBrUnpAy/X6OJMPIqbRxFazQd3w74ogKMh1mE73DMrZwkJwHy75ugs+NxyjUjZE/QEUeJwX4H5TqHBF6QbfGuLLuTWv+BcTtnAig+jZ9t1RSqZP4ZZaPdL7ayrgQS5Ktzpu5pdvMQvK6OemVe+JjqSDN/kXFoDV2fqh04TP+Ix8XZ6eUtsfpUoPpWNl3BOKfhFNJvXb8OKS1aow3ZRYwKpo5+NNZD+CLKykXh3GEl38QsDh7mHQ4eXjmio03PteGj/FB+LGWsxiKFR7bMr8nAGJPkcSWVnnSq+YhvuHTjm/Uorg2Tzakk1kA8RwC77yRCglZvrWRqbxoSUXCUNr0mUespeWQqAZ/jVY+10qs=
+    file_glob: true
+    file: build/*
+    skip_cleanup: true
+    on:
+      tags: true
+      repo: sunziping2016/efb-caiyun-weather-slave
+  - provider: pypi
+    username: "__token__"
+    password:
+      secure: Rw7UDWGrkVuuP3ZoTMHGJQtnv6JSLEETSO3yti01TQZ0YbeE+4Irjaj/sxetDM3lreSbrzG+bfRUs9V4VlzartrDIrMnZmeNzsC1KOMfpnsbtgvY8p0f5tdTHV8IWisX12uim50ReHqej+iMbjCK+NmnHS++7tnVHHdO62y4J90rfUlHcPOBIE+9mR5IRGk+Edn5h9r0GIDjG24e/s8Y9MtMqhq164oxaeOqG+eTSmyp9v1k54q9B7bd78+cv9xXgqQbrofhNKHxub1lmGlQdGWEINjDSvuUi8uvk8GMz/rtOj/z93yo1U4IDbPVstC55M+K53bVWUtx3dl3L0yk9E29fuDLUWu1a8nbV6lxLcq50BHjtB7KMwDcY1WcnOtwXy9B8X0Ow5yCIp7jBDJbfu2MUGU+DkYuBGhw36djmNTZD0KcNOhTzJn8c0426upIdyGTP6tme/FOdumLMLMaUxBwc4UR1mLV5oFwIJ9rUeKA/9deNsAY5Ctpbwp/VjH2OW6ZY7rziYgs1f9hD7sRWwCXiDrECBkhoxTRW1DfPF3ZcdffwDd1LjoOaXEHsq/PBBpbacpWUygzDYim03rf4DQNLA9hpxPq2Ho1IBD4sVc9Zvxdh5Qv1oTPRhzAHz3PZ8Cwuet7gIwQSLYOlgp/Si0qD5Ua85YVnzKLFllBI3U=
+    on:
+      tags: true
