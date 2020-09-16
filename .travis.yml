@@ -1,9 +1,13 @@
 language: python
 python:
-  - "3.6"
-  - "3.7"
-  - "3.8"
+  - '3.8'
 script:
   - mypy efb_caiyun_weather_slave tests
   - pytest
-
+deploy:
+  - provider: pypi
+    username: "__token__"
+    password:
+      secure: Rw7UDWGrkVuuP3ZoTMHGJQtnv6JSLEETSO3yti01TQZ0YbeE+4Irjaj/sxetDM3lreSbrzG+bfRUs9V4VlzartrDIrMnZmeNzsC1KOMfpnsbtgvY8p0f5tdTHV8IWisX12uim50ReHqej+iMbjCK+NmnHS++7tnVHHdO62y4J90rfUlHcPOBIE+9mR5IRGk+Edn5h9r0GIDjG24e/s8Y9MtMqhq164oxaeOqG+eTSmyp9v1k54q9B7bd78+cv9xXgqQbrofhNKHxub1lmGlQdGWEINjDSvuUi8uvk8GMz/rtOj/z93yo1U4IDbPVstC55M+K53bVWUtx3dl3L0yk9E29fuDLUWu1a8nbV6lxLcq50BHjtB7KMwDcY1WcnOtwXy9B8X0Ow5yCIp7jBDJbfu2MUGU+DkYuBGhw36djmNTZD0KcNOhTzJn8c0426upIdyGTP6tme/FOdumLMLMaUxBwc4UR1mLV5oFwIJ9rUeKA/9deNsAY5Ctpbwp/VjH2OW6ZY7rziYgs1f9hD7sRWwCXiDrECBkhoxTRW1DfPF3ZcdffwDd1LjoOaXEHsq/PBBpbacpWUygzDYim03rf4DQNLA9hpxPq2Ho1IBD4sVc9Zvxdh5Qv1oTPRhzAHz3PZ8Cwuet7gIwQSLYOlgp/Si0qD5Ua85YVnzKLFllBI3U=
+    on:
+      tags: true
