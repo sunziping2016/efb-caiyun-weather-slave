@@ -1,6 +1,6 @@
 # EFB CaiYun Weather Slave Channel
 
-[![Build Status](https://travis-ci.org/sunziping2016/efb-caiyun-weather-slave.svg?branch=master)](https://travis-ci.org/sunziping2016/efb-caiyun-weather-slave)
+[![Build Status](https://travis-ci.com/sunziping2016/efb-caiyun-weather-slave.svg?branch=master)](https://travis-ci.com/sunziping2016/efb-caiyun-weather-slave)
 [![codecov](https://codecov.io/gh/sunziping2016/efb-caiyun-weather-slave/branch/master/graph/badge.svg)](https://codecov.io/gh/sunziping2016/efb-caiyun-weather-slave)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
