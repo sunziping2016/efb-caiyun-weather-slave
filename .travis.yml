@@ -1,10 +1,13 @@
 language: python
 python:
   - '3.8'
+install:
+  - pip install -r requirements.txt -r requirements-dev.txt
 env:
   - CODECOV_TOKEN="60da5c2d-34ad-44a6-b804-6abf490e8761"
 script:
-  - mypy efb_caiyun_weather_slave tests
+  - mypy efb_caiyun_weather_slave tests setup.py
+  - pylint efb_caiyun_weather_slave tests
   - PYTHONPATH=$(pwd) pytest --cov-report=term --cov=efb_caiyun_weather_slave tests/
 after_success:
   - codecov

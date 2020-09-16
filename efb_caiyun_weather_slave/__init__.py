@@ -1,3 +1,7 @@
+"""
+This module provides a slave channel for EH Forwarder Bot. Users can use it to get weather
+forecast or report.
+"""
 from threading import Condition
 from typing import BinaryIO, Collection, Optional
 from uuid import uuid4
@@ -13,6 +17,10 @@ from .__version__ import __version__
 
 
 class CaiYunWeatherSlave(SlaveChannel):
+    """
+    This slave channel crawls weather data from CaiYun API regularly and optionally opens a web
+    server to serve the data.
+    """
     channel_name: str = 'Echo channel'
     channel_emoji: str = '🔁'
     channel_id: ModuleID = ModuleID('hawthorn.echo')
@@ -22,7 +30,8 @@ class CaiYunWeatherSlave(SlaveChannel):
     def __init__(self, instance_id: InstanceID = None):
         super().__init__(instance_id)
         # For test
-        self.chat: PrivateChat = PrivateChat(channel=self, name='Echo Message', uid=ChatID('echo_chat'))
+        self.chat: PrivateChat = PrivateChat(
+            channel=self, name='Echo Message', uid=ChatID('echo_chat'))
         self.condition: Optional[Condition] = None
 
     def send_message(self, msg: Message) -> Message:

@@ -1,8 +1,10 @@
+"""
+Setup script for this package.
+"""
 from setuptools import setup, find_packages
 
+from efb_caiyun_weather_slave.__version__ import __version__
 
-__version__ = ''
-exec(open('efb_caiyun_weather_slave/__version__.py').read())
 
 with open('README.md') as f:
     long_description = f.read()
